@@ -48,8 +48,22 @@ agregar bootstrap como gema al proyecto
 		rails generate devise user
     rails generate devise:controllers users
 
-
 * Imagenes Administrador
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/1.png" />
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/2.png" />
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/3.png" />
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/4.png" />
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/5.png" />
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/6.png" />
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/7.png" />
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/8.png" />
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/9.png" />
 
 
 * Imágenes Usuario normal
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/10.png" />
+
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/11.png" />
+
+* Inicio de la aplicación
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/0.png" />
