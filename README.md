@@ -69,5 +69,6 @@ agregar bootstrap como gema al proyecto
 <img src="https://github.com/mauri-1973/template/blob/main/imagenes/0.png" />
 
 
-
-url imagen : /rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MiwicHVyIjoiYmxvYl9pZCJ9fQ==--c0b6fa37c5af73bf19f5f208c6c79aaad9d46ad7/istockphoto-513133900-612x612.jpg
+* Uso de Bucket para imagenes
+url imagen : https://mascotatinder.s3.us-east-2.amazonaws.com/nulpcdcb3juqi5y8tqx8p8bpr2a3
+<img src="https://github.com/mauri-1973/template/blob/main/imagenes/12.jpeg" />
