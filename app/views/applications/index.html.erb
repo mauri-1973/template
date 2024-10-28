@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Applications" %>
+
+<h1>Postulaciones</h1>
+
+<div id="applications">
+
+    <% if @applications.count == 0 %>
+
+      <h4>No hay postulaciones activas</h4>
+
+    <% else %>
+
+      <% @applications.each do |application| %>
+
+          <%= render 'application', application: application %>
+          
+      <% end %>
+
+    <% end %>
+  
+</div>
+
+

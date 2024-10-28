@@ -1,0 +1,36 @@
+
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Applications" %>
+
+<h1>Empleos Disponibles</h1>
+
+<div class="container-fluid">
+
+  <div id="disponibles" class="row">
+
+    <% if @disponibles.count == 0 %>
+
+      <h4>No hay empleos disponibles</h4>
+
+    <% else %>
+
+      <% @disponibles.each do |disponible| %>
+
+        <%= render 'disponible', disponible: disponible %>
+        
+      <% end %>
+      
+    <% end %>
+
+    
+
+    <div class="col-12">
+
+      <%= paginate @disponibles %>
+
+    </div>
+    
+  </div>
+
+</div>

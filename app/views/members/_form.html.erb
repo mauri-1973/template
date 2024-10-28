@@ -1,0 +1,69 @@
+<%= form_with(model: member) do |form| %>
+  <% if member.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(member.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+      <ul>
+        <% member.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group text-center">
+    <% if member.profile_picture.attached? %>
+      <%= image_tag url_for(member.profile_picture), class: 'rounded-circle', style:"width:120px;height:120px" %>
+    <% else %>
+      <img src="https://static.vecteezy.com/system/resources/previews/013/777/225/original/tired-man-from-work-illustration-on-white-background-free-vector.jpg" alt="user" width="120" height="120" class="rounded-circle">
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= form.label "Email" %><br />
+    <%= form.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+    
+  </div>
+  <div class="form-group">
+    <%= form.label :name, "Nombre" %>
+    <%= form.text_field :name, autocomplete: "name", class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :phone, "Teléfono" %>
+    <%= form.text_field :phone, autocomplete: "phone", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :password, "Contraseña" %> <i>(Ingrese su nueva contraseña)</i><br />
+    <%= form.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+    <% if @minimum_password_length %>
+      <br />
+      <em>Mínimo <%= @minimum_password_length %> caracteres</em>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :password_confirmation, "Repita su contraseña" %><i>(Repita su nueva contraseña)</i><br />
+    <%= form.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :profile_picture, "Foto de perfil" %>
+    <%= form.file_field :profile_picture, multiple: false, class: 'form-control' %>
+  </div>
+
+  
+  <div class="form-group" style="display:<% if member.id != 8 %>block; <% else %> none; <% end %>" >
+    <%= form.label :role, "Rol" %>
+    <%= form.select :role, User::ROLES.map { |r| [r.humanize, r] }, { include_blank: 'Seleccione un rol' }, class: 'form-control' %>
+  </div>
+  <br>
+  <% if desde == 'edit' %>
+  <div class="form-group">
+    <%= form.submit "Actualizar", class:"btn btn-primary btn-sm" %>
+  </div>
+  <% end %>
+  <% if desde == 'new' %>
+  <div class="form-group">
+    <%= form.submit "Crear", class:"btn btn-primary btn-sm" %>
+  </div>
+  <% end %>
+<% end %>

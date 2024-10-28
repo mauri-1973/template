@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Jobs" %>
+
+<h1>Publicaciones</h1>
+<div class="container-fluid">
+  
+  
+  <% if user_signed_in? %>
+    <% if current_user.role == "admin" %>
+      <a class="btn btn-success btn-sm mb-3" href="/administrador/agregar-nueva-publicacion">Agregar</a>
+    <% end %>
+  <% end %>
+  <div id="jobs" class="row">
+
+    <% @job_post.each do |job_post| %>
+
+      <%= render job_post, desde:@desde %>
+      
+    <% end %>
+    <div class="col-12">
+      <%= paginate @job_post %>
+    </div>
+  </div>
+  <% if user_signed_in? %>
+    <% if current_user.role == "admin" %>
+      <a class="btn btn-success btn-sm mt-3" href="/administrador/agregar-nueva-publicacion">Agregar</a>
+    <% end %>
+  <% end %>
+  
+</div>
+

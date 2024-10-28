@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @job_post , desde:@desde %>
+
+<div class="btn-group">
+  <%= link_to "Editar empleo", edit_job_post_path(@job_post), class:"btn btn-success btn-sm" %> &nbsp;|&nbsp;
+  <%= link_to "ver Todos", job_posts_path, class:"btn btn-success btn-sm" %>
+</div>
+<%= button_to "Eliminar empleo", @job_post, method: :delete, class:"btn btn-danger btn-sm mt-5" %>
+
+

@@ -1,0 +1,42 @@
+
+<div class="col-12" id="<%= dom_id job_post %>">
+  
+  <div class="card">
+    <div class="card-header">
+      <strong>Fecha de ingreso:</strong> <%= job_post.created_at.strftime("%d-%m-%Y") %>
+      <strong>Hora:</strong> <%= job_post.created_at.strftime("%H:%M:%S") %>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"><strong>Título:</strong>
+          <% if job_post.title == nil %>
+            Sin Registro
+          <% else %>
+            <%= job_post.title %>
+          <% end %>
+        </h5>
+        <p class="card-text"><strong>Descripción:</strong> 
+          <% if job_post.description == nil %>
+            Sin Registro
+          <% else %>
+            <%= job_post.description %>
+          <% end %>
+        </p>
+      
+    </div>
+    <% if user_signed_in? %>
+      
+        <% if current_user.role == "user" %>
+          postular
+        <% end %>
+        <% if current_user.role == "admin" && desde != 'show' %>
+          <div class="card-footer text-body-secondary text-center">
+            <%= link_to "Editar empleo", edit_job_post_path(job_post), class:"btn btn-success btn-sm" %>
+          </div>
+        <% end %>
+      
+    <% end %>
+    
+    
+  </div>
+</div>
+<hr class="mt-3">

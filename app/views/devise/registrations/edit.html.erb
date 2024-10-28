@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-6 offset-3 col-xl-6 offset-3 col-lg-6 offset-3 col-md-6 offset-3 col-sm-12 col-xs-12">
+      <h2>Editar perfil de usuario</h2>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="form-group text-center">
+          <% if @user.profile_picture.attached? %>
+            <%= image_tag url_for(@user.profile_picture), class: 'rounded-circle', style:"width:120px;height:120px " %>
+          <% else %>
+            <img src="https://static.vecteezy.com/system/resources/previews/013/777/225/original/tired-man-from-work-illustration-on-white-background-free-vector.jpg" alt="user" width="32" height="32" class="rounded-circle">
+          <% end %>
+        </div>
+        <div class="form-group">
+          <%= f.label "Email" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <br />
+            <em>Currently waiting confirmation for: <%= resource.unconfirmed_email %></em>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :name, "Nombre" %>
+          <%= f.text_field :name, autocomplete: "name", class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :phone, "Teléfono" %>
+          <%= f.text_field :phone, autocomplete: "phone", class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, "Nueva Contraseña" %> <i>(Ingrese su nueva contraseña)</i><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+          <% if @minimum_password_length %>
+            <em>Mínimo <%= @minimum_password_length %> caracteres</em>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, "Repita su nueva contraseña" %><i>(Repita su nueva contraseña)</i><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :current_password, "Contraseña antigua" %> <i>(Usted necesita ingresar su antigua contraseña)</i><br />
+          <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :profile_picture, "Foto de perfil" %>
+          <%= f.file_field :profile_picture, multiple: false, class: 'form-control' %>
+        </div>
+        <br>
+        <div class="form-group">
+          <%= f.submit "Actualizar", class: 'btn btn-primary btn-sm' %>
+        </div>
+      <% end %>
+      <br>
+      <% if current_user.id != 8 %>
+      <h3>Cancelar mi cuenta</h3>
+
+      <div class="btn-group">
+        Está seguro? <%= button_to "Continuar", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger btn-sm" %>&nbsp;|&nbsp;<%= link_to "Volver", :back, class:"btn btn-success btn-sm ml-2" %>
+      </div>
+      <% else %>
+      <div class="btn-group">
+        <%= link_to "Volver", :back, class:"btn btn-success btn-sm ml-2" %>
+      </div>
+      <% end %>
+    </div>
+  </div>

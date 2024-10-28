@@ -1,0 +1,68 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Notificaciones" %>
+
+<h1>Notificaciones</h1>
+<div class="container-fluid">
+    <div id="notificaciones" class="row">
+
+    <% if @notificaciones.count == 0 %>
+    
+        No hay notificaciones disponibles.
+
+    <% else %>
+
+    <div id="notificaciones" class="row">
+
+        <% @notificaciones.each do |notificaciones| %>
+
+        <div class="col-12" id="<%= dom_id notificaciones %>">
+  
+            <div class="card">
+                <div class="card-header">
+                <strong>Fecha de postulación:</strong> <%= notificaciones.created_at.strftime("%d-%m-%Y") %>
+                <strong>Hora:</strong> <%= notificaciones.created_at.strftime("%H:%M:%S") %>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="card-title"><strong>Nombre postulante:</strong>
+                                <% if notificaciones.name == nil %>
+                                    Sin Registro
+                                <% else %>
+                                    <%= notificaciones.name %>
+                                <% end %>
+                                </h5>
+                                <p class="card-text"><strong>Email postulante:</strong> 
+                                <% if notificaciones.email == nil %>
+                                    Sin Registro
+                                <% else %>
+                                    <%= notificaciones.email %>
+                                <% end %>
+                                </p>
+                                <p class="card-text"><strong>Empleo:</strong> 
+                                <% if notificaciones.title == nil %>
+                                    Sin Registro
+                                <% else %>
+                                    <%= notificaciones.title %>
+                                <% end %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="mt-3">
+        <% end %>
+        
+    </div>
+
+    <% end %>
+    <div class="col-12">
+        <%= paginate @notificaciones %>
+    </div>
+  
+  
+</div>

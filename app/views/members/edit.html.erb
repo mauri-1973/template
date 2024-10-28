@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-6 offset-3 col-xl-6 offset-3 col-lg-6 offset-3 col-md-6 offset-3 col-sm-12 col-xs-12">
+    <% content_for :title, "Editing member" %>
+
+    <h1>Editar Usuario</h1>
+
+    <%= render "form", member: @member, desde:@desde %>
+
+    <br>
+
+    <div class="btn-group">
+      <%= link_to "Ver Usuario", @member, class:"btn btn-success btn-sm" %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Ver todos", members_path, class:"btn btn-success btn-sm" %>
+    </div>
+
+  </div>
+
+</div>

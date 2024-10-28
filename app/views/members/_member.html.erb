@@ -1,0 +1,61 @@
+
+<div class="col-12" id="<%= dom_id member %>">
+  
+  <div class="card">
+    <div class="card-header">
+      <strong>Fecha de ingreso:</strong> <%= member.created_at.strftime("%d-%m-%Y") %>
+      <strong>Hora:</strong> <%= member.created_at.strftime("%H:%M:%S") %>
+    </div>
+    <div class="card-body">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <h5 class="card-title"><strong>Nombre:</strong>
+              <% if member.name == nil %>
+                Sin Registro
+              <% else %>
+                <%= member.name %>
+              <% end %>
+             </h5>
+            <p class="card-text"><strong>Email:</strong> 
+              <% if member.name == nil %>
+                Sin Registro
+              <% else %>
+                <%= member.email %>
+              <% end %>
+            </p>
+            <p class="card-text"><strong>Teléfono:</strong> 
+              <% if member.name == nil %>
+                Sin Registro
+              <% else %>
+                <%= member.phone %>
+              <% end %>
+            </p>
+            <p class="card-text"><strong>Rol:</strong>
+             <% if member.role == 'user' %>
+             Usuario Normal
+             <% else %>
+             Administrador
+             <% end %>
+             </p>
+          </div>
+          <div class="col-6">
+            <% if member.profile_picture.attached? %>
+              <%= image_tag url_for(member.profile_picture), class: 'rounded mx-auto d-block', style:"width:120px;height:120px" %>
+            <% else %>
+              <img src="https://static.vecteezy.com/system/resources/previews/013/777/225/original/tired-man-from-work-illustration-on-white-background-free-vector.jpg" alt="user" width="120" height="120" class="rounded mx-auto d-block">
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <% if desde == "index" %>
+    <div class="card-footer text-body-secondary text-center">
+      <%= link_to "Ver Usuario", member, class:"btn btn-primary btn-sm" %>
+      </div>
+    <% end %>
+    
+  </div>
+</div>
+<hr class="mt-3">

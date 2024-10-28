@@ -1,0 +1,40 @@
+
+<div class="col-12" id="<%= dom_id disponible %>">
+  
+  <div class="card">
+    <div class="card-header">
+      <strong>Fecha de publicación:</strong> <%= disponible.created_at.strftime("%d-%m-%Y") %>
+      <strong>Hora:</strong> <%= disponible.created_at.strftime("%H:%M:%S") %>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"><strong>Título:</strong>
+          <% if disponible.title == nil %>
+            Sin Registro
+          <% else %>
+            <%= disponible.title %>
+          <% end %>
+        </h5>
+        <p class="card-text"><strong>Descripción:</strong> 
+          <% if disponible.description == nil %>
+            Sin Registro
+          <% else %>
+            <%= disponible.description %>
+          <% end %>
+        </p>
+      
+    </div>
+    <% if user_signed_in? %>
+      
+        <% if current_user.role == "user" %>
+        <div class="card-footer text-body-secondary text-center">
+            
+            <%= link_to 'Postular', applications_disponibles_create_path(application: { user_id: current_user.id, job_post_id: disponible.id, status: 'Nueva-Postulación' }), method: :post, class: "btn btn-primary btn-sm" %>
+        </div>
+        <% end %>
+      
+    <% end %>
+    
+    
+  </div>
+</div>
+<hr class="mt-3">

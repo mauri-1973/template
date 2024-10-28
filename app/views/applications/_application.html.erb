@@ -1,0 +1,39 @@
+
+<div class="col-12" id="<%= dom_id application %>">
+  
+  <div class="card">
+    <div class="card-header">
+      <strong>Fecha de ingreso:</strong> <%= application.created_at.strftime("%d-%m-%Y") %>
+      <strong>Hora:</strong> <%= application.created_at.strftime("%H:%M:%S") %>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"><strong>Título:</strong>
+          <% if application.title == nil %>
+            Sin Registro
+          <% else %>
+            <%= application.title %>
+          <% end %>
+        </h5>
+        <p class="card-text"><strong>Descripción:</strong> 
+          <% if application.description == nil %>
+            Sin Registro
+          <% else %>
+            <%= application.description %>
+          <% end %>
+        </p>
+      
+    </div>
+    <% if user_signed_in? %>
+      
+      <div class="card-footer text-body-secondary text-center">
+      
+          <%= button_tag "Postulación activa", type: "button", class: "btn btn-primary btn-sm" %>
+          
+      </div>
+      
+    <% end %>
+    
+    
+  </div>
+</div>
+<hr class="mt-3">

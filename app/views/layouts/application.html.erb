@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Templatenew" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+  <header class="py-3 mb-4 border-bottom shadow">
+    <div class="container-fluid align-items-center d-flex">
+        <div class="flex-shrink-1">
+            <a href="#" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none">
+                <i class="bi bi-bootstrap fs-2 text-dark">INFOEMPLEOS</i>
+            </a>
+        </div>
+        <div class="flex-grow-1 d-flex align-items-center">
+            <form class="w-100 me-3">
+                
+            </form>
+            <% if user_signed_in? && current_user.role == 'admin' %>
+              <%= link_to "Usuarios", members_path, class:"dropdown-item" %>
+              <%= link_to "Empleos", ver_empleos_publicados_path, class:"dropdown-item" %>
+              <a type="button" class="dropdown-item btn-sm" href="/administrador/ver-notificaciones-nuevas">
+                Notificaciones <span class="badge text-bg-secondary"><%= session[:count_appli] %></span>
+              </a>
+              
+            <% end%>
+            <% if user_signed_in? && current_user.role == 'user' %>
+              
+              <%= link_to "Postulaciones", ver_postulaciones_realizadas_path, class:"dropdown-item" %>
+              <%= link_to "Empleos", ver_postulaciones_disponibles_path, class:"dropdown-item" %>
+            <% end%>
+            <div class="flex-shrink-0 dropdown">
+                <% if user_signed_in? %>
+                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                      
+                        <% if current_user.name %>
+                          <%= current_user.name %>
+                        <% else %>
+                          <%= current_user.email %>
+                        <% end %>
+                        <% if current_user.profile_picture.attached? %>
+                          <%= image_tag url_for(current_user.profile_picture), class: 'rounded-circle', style:"width:32px;height:32px " %>
+                        <% else %>
+                          <img src="https://static.vecteezy.com/system/resources/previews/013/777/225/original/tired-man-from-work-illustration-on-white-background-free-vector.jpg" alt="user" width="32" height="32" class="rounded-circle">
+                        <% end %>
+                      
+                      
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser2" style="">
+                      <% if user_signed_in? %>
+                        <li><%= button_to 'Cerrar sesión', destroy_user_session_path, class: 'dropdown-item', method: :delete %></li>
+                      <% end%>
+                  </ul>
+                <% end %>
+            </div>
+        </div>
+    </div>
+  </header>
+  <div class="offcanvas offcanvas-start w-25" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
+    
+    <div class="offcanvas-header">
+        <% if user_signed_in? %>
+        <h6 class="offcanvas-title d-none d-sm-block" id="offcanvas">Menu</h6>
+        <% end%>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    
+    <div class="offcanvas-body px-0">
+        <% if user_signed_in? %>
+          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
+            <% if user_signed_in? && current_user.role == 'admin' %>
+              <li class="nav-item">
+                <a class="nav-link text-truncate" href="/">Usuarios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-truncate" href="/administrador/ver-empleos-publicados">Empleos</a>
+              </li>
+            <% end%>
+            
+            <li class="nav-item">
+                <%= button_to 'Cerrar sesión', destroy_user_session_path, class: 'nav-link text-truncate', method: :delete %>
+            </li>
+            
+          </ul>
+          
+        <% else %>
+
+          <h2>Lorem Ipsum</h2>
+          <p style="text-align: justify;" class="m-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ultricies convallis enim, nec vestibulum nunc. Nulla facilisi. Etiam mattis risus eget purus dignissim facilisis non id sem. Duis est lectus, bibendum sit amet tincidunt sed, cursus quis justo. Vestibulum ullamcorper neque in magna iaculis, tempor laoreet diam rhoncus. Duis pharetra suscipit justo, ac congue odio congue condimentum. Proin quis rutrum lorem, vel consectetur felis. Vivamus est lectus, efficitur nec orci a, pulvinar elementum dui. Ut sapien libero, ultrices eget facilisis sed, rutrum vel eros. Maecenas sollicitudin pulvinar fermentum. Aliquam vel nisl dui. Donec facilisis felis gravida, rutrum nulla quis, suscipit tellus. Nullam varius risus turpis, scelerisque luctus neque molestie in. Curabitur justo urna, sagittis ut aliquet eu, rhoncus ut mauris. Etiam nec orci felis. Pellentesque dictum blandit posuere. </p>
+          
+        <% end%>
+        
+    </div>
+  </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col min-vh-100 p-4">
+                <!-- toggler -->
+                <button class="btn float-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button">
+                    <i class="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">X</i>
+                </button>
+                <div class="container">
+                  <div class="row">
+                    <%= yield %>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><%= button_to 'Cerrar sesión', destroy_user_session_path, class: 'nav-link px-2 text-body-secondary', method: :delete %></li>
+            <% if user_signed_in? && current_user.role == 'admin' %>
+              
+              <li class="nav-item"><%= link_to "Usuarios", members_path, class:"nav-link px-2 text-body-secondary" %></li>
+              <li class="nav-item"><%= link_to "Empleos", ver_empleos_publicados_path, class:"nav-link px-2 text-body-secondary" %></li>
+            <% end%>
+            <% if user_signed_in? && current_user.role == 'user' %>
+              <li class="nav-item"><%= link_to "Postulaciones", ver_postulaciones_realizadas_path, class:"nav-link px-2 text-body-secondary" %></li>
+              <li class="nav-item"><%= link_to "Empleos", ver_postulaciones_disponibles_path, class:"nav-link px-2 text-body-secondary" %></li>
+            <% end%>
+        
+      </ul>
+      <p class="text-center text-body-secondary">© 2024 Company, Inc</p>
+    </footer>
+  </body>
+</html>
